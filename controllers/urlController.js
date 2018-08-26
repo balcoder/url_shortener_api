@@ -10,17 +10,6 @@ var { sanitizeBody } = require('express-validator/filter');
 
 var async = require('async');
 
-// Shorten url and save to database
-// exports.url_shorten = function(req, res) {
-//   // Check if url points to real domain using nodes dns lookup
-//   dns.lookup(req.params.longUrl, function(err, address, family) {
-//     if(err !== null) {
-//       res.json({"error":"invalid URL"})
-//     };
-//     // we have a valid url
-//     res.json({'long-url':req.body.url });
-//   });
-// };
 
 function htmlEntityDecode(str) {
   var re = /&#x2F;/ig;
@@ -52,11 +41,6 @@ exports.url_shorten =  [
             res.render('index', { errors: errors.array()});
         return;
       }
-      // else  if (req.dnsInfo == 'invalid') {
-      //     // dns lookup failed
-      //      res.json({"error":"invalid URL"})
-      //      return;
-      //   }
        else {
         // Data from form is valid.
         // Check if Url with same name already exists.
