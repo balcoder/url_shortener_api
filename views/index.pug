@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  .container
+    h2 API Project: URL Shortener Microservice
+    h3 User Story:
+    ol
+      li
+        | I can POST a URL to
+        code [project_url]/api/shorturl/new
+        |  and I will receive a shortened URL in the JSON response.
+        br
+        | Example :
+        code {"original_url":"www.google.com","short_url":1}
+      li
+        | If I pass an invalid URL that doesn't follow the
+        code http(s)://www.example.com(/more/routes)
+        |  format, the JSON response will contain an error like
+        code {"error":"invalid URL"}
+        br
+        |           HINT: to be sure that the submitted url points to a valid site you can use the function
+        code dns.lookup(host, cb)
+        |  from the
+        code dns
+        |  core module.
+      li When I visit the shortened URL, it will redirect me to my original link.
+    h3 Short URL Creation
+    p
+      | example:
+      code POST [project_url]/api/shorturl/new
+      |  -
+      code https://www.google.com
+    form(action='api/shorturl/new', method='POST')
+      label(for='url_input') URL to be shortened
+      input#url_input(type='text', name='url', value='https://www.freecodecamp.com')
+      input(type='submit', value='POST URL')
+    h3 Example Usage:
+    a(href='https://thread-paper.hyperdev.space/api/shorturl/3')
+      | [this_project_url]/api/shorturl/3
+    if errors
+      ul
+        for error in errors
+          li!= error.msg
